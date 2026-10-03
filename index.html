@@ -1,0 +1,1741 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>G.M Traders Transport & Earthmovers</title>
+  <style>
+    :root {
+      --bg: #f3f4f6;
+      --card: #ffffff;
+      --border: #d1d5db;
+      --text-main: #111827;
+      --text-muted: #4b5563;
+      --primary: #d97706;
+      --primary-hover: #b45309;
+      --primary-soft: #fef3c7;
+      --success: #15803d;
+      --success-soft: #dcfce7;
+      --danger: #b91c1c;
+      --danger-soft: #fee2e2;
+      --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: var(--font-stack);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 70px;
+    }
+
+    @media (min-width: 768px) {
+      body {
+        padding-bottom: 20px;
+      }
+    }
+
+    /* Header */
+    header {
+      background: #0f172a;
+      color: #ffffff;
+      padding: 12px 16px;
+      border-bottom: 3px solid var(--primary);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .header-inner {
+      max-width: 1050px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-title {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .brand-badge {
+      background: var(--primary);
+      color: #0f172a;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .brand-subtitle {
+      font-size: 11px;
+      color: #94a3b8;
+      margin-top: 2px;
+    }
+
+    /* Simulation & Fast Demo Bar */
+    .demo-bar {
+      background: #1e293b;
+      color: #f1f5f9;
+      padding: 8px 16px;
+      font-size: 12px;
+      border-bottom: 1px solid #334155;
+    }
+
+    .demo-bar-inner {
+      max-width: 1050px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* Navigation Bar */
+    .top-nav {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 60px;
+      z-index: 40;
+    }
+
+    .nav-container {
+      max-width: 1050px;
+      margin: 0 auto;
+      display: flex;
+      overflow-x: auto;
+      padding: 4px 12px;
+      gap: 6px;
+    }
+
+    .nav-link {
+      background: transparent;
+      border: none;
+      padding: 10px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+      border-radius: 8px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+
+    .nav-link:hover {
+      background: #f1f5f9;
+      color: var(--text-main);
+    }
+
+    .nav-link.active {
+      background: var(--primary-soft);
+      color: var(--primary-hover);
+      font-weight: 800;
+    }
+
+    /* Mobile Bottom Navigation */
+    .mobile-tab-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #ffffff;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-around;
+      padding: 6px 0;
+      z-index: 50;
+    }
+
+    @media (min-width: 768px) {
+      .mobile-tab-bar {
+        display: none;
+      }
+    }
+
+    .mobile-tab-btn {
+      background: none;
+      border: none;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      padding: 4px 8px;
+      cursor: pointer;
+    }
+
+    .mobile-tab-btn.active {
+      color: var(--primary-hover);
+    }
+
+    /* Main Container */
+    main {
+      max-width: 1050px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 16px;
+      flex: 1;
+    }
+
+    .view-panel {
+      display: none;
+    }
+
+    .view-panel.active {
+      display: block;
+    }
+
+    /* KPI Summary Row */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    @media (min-width: 768px) {
+      .kpi-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .kpi-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    .kpi-title {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .kpi-number {
+      font-size: 20px;
+      font-weight: 900;
+      margin-top: 4px;
+    }
+
+    .kpi-subtitle {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* Box Container */
+    .content-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+
+    .content-box-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .content-box-title {
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    /* Stock Catalog Grid */
+    .stock-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    @media (min-width: 600px) {
+      .stock-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 900px) {
+      .stock-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .stock-card {
+      background: #fafafa;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .stock-card:hover {
+      border-color: #cbd5e1;
+    }
+
+    .stock-item-name {
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .stock-item-badge {
+      font-size: 11px;
+      font-weight: 800;
+      color: #334155;
+      background: #e2e8f0;
+      padding: 2px 6px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-top: 4px;
+    }
+
+    .stock-item-badge.unit-badge {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .stock-val-box {
+      text-align: right;
+    }
+
+    .stock-qty-display {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--success);
+    }
+
+    .stock-qty-display.low {
+      color: var(--danger);
+    }
+
+    /* Forms */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    @media (min-width: 640px) {
+      .form-grid.col-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .form-grid.col-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .input-field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .input-field label {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .input-field input, .input-field select {
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 9px 12px;
+      font-size: 14px;
+      font-family: inherit;
+      color: var(--text-main);
+      outline: none;
+      width: 100%;
+    }
+
+    .input-field input:focus, .input-field select:focus {
+      border-color: var(--primary);
+    }
+
+    .input-field input[readonly] {
+      background: #f1f5f9;
+      color: var(--text-muted);
+      font-weight: 700;
+      cursor: not-allowed;
+    }
+
+    /* Calculation Display Box */
+    .calc-card {
+      background: #fffbeb;
+      border: 1.5px dashed #fde68a;
+      border-radius: 10px;
+      padding: 14px;
+      margin: 14px 0;
+    }
+
+    .calc-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      font-size: 13px;
+    }
+
+    .calc-row.grand-total {
+      border-top: 1px solid #fde68a;
+      padding-top: 8px;
+      margin-top: 8px;
+      font-size: 16px;
+      font-weight: 900;
+      color: #92400e;
+    }
+
+    /* Buttons */
+    .btn {
+      background: var(--primary);
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      transition: background 0.15s ease;
+    }
+
+    .btn:hover {
+      background: var(--primary-hover);
+    }
+
+    .btn-green {
+      background: var(--success);
+      color: #ffffff;
+    }
+
+    .btn-green:hover {
+      background: #166534;
+    }
+
+    .btn-outline {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      width: auto;
+    }
+
+    .btn-outline:hover {
+      background: #f9fafb;
+    }
+
+    .btn-sm {
+      padding: 6px 10px;
+      font-size: 11px;
+      border-radius: 6px;
+      width: auto;
+    }
+
+    /* Data Tables */
+    .table-responsive {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      text-align: left;
+    }
+
+    th {
+      background: #f8fafc;
+      padding: 10px 12px;
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    td {
+      padding: 10px 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    tr:hover td {
+      background: #f8fafc;
+    }
+
+    /* Modals */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 100;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: #ffffff;
+      border-radius: 14px;
+      width: 100%;
+      max-width: 480px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .modal-close-btn {
+      background: none;
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    /* Toast Notification */
+    .toast-msg {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      background: #0f172a;
+      color: #ffffff;
+      border: 1.5px solid var(--primary);
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      z-index: 110;
+      transform: translateY(-150%);
+      transition: transform 0.25s ease-out;
+    }
+
+    .toast-msg.show {
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Brand Header -->
+  <header>
+    <div class="header-inner">
+      <div>
+        <div class="brand-title">
+          G.M TRADERS
+          <span class="brand-badge">TRANSPORT &amp; EARTHMOVERS</span>
+        </div>
+        <div class="brand-subtitle">Stock Inward, Dispatch Billing &amp; Credit Ledger</div>
+      </div>
+      <div>
+        <button class="btn btn-outline btn-sm" onclick="exportDataCSV()">
+          📊 Export CSV
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Live Demo / Quick Simulation Bar -->
+  <div class="demo-bar">
+    <div class="demo-bar-inner">
+      <div>
+        ⚡ <b>Demo Simulation:</b> Type seiyamal live transactions test seiya:
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <button class="btn btn-sm" onclick="loadSampleDemoData()">
+          ▶ Load Demo Data
+        </button>
+        <button class="btn btn-outline btn-sm" style="color:#ffffff; border-color:#475569;" onclick="resetAllAppData()">
+          🔄 Reset All
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Navigation -->
+  <nav class="top-nav">
+    <div class="nav-container">
+      <button class="nav-link active" data-panel="panel-stock" onclick="navigateTo('panel-stock')">
+        📦 Live Stock (கையிருப்பு)
+      </button>
+      <button class="nav-link" data-panel="panel-billing" onclick="navigateTo('panel-billing')">
+        🚚 Dispatch Bill (விற்பனை)
+      </button>
+      <button class="nav-link" data-panel="panel-inward" onclick="navigateTo('panel-inward')">
+        📥 Quarry Inward (வரவு)
+      </button>
+      <button class="nav-link" data-panel="panel-ledger" onclick="navigateTo('panel-ledger')">
+        📒 Credit Ledger (கடன் பாக்கி)
+      </button>
+      <button class="nav-link" data-panel="panel-trips" onclick="navigateTo('panel-trips')">
+        📋 Trip History (வரலாறு)
+      </button>
+    </div>
+  </nav>
+
+  <!-- Content Sections -->
+  <main>
+    <!-- Top Statistics Summary -->
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-title">Today's Sales (விற்பனை)</div>
+        <div class="kpi-number" style="color: var(--success);" id="kpi-today-sales-val">₹0</div>
+        <div class="kpi-subtitle" id="kpi-today-loads-val">0 Loads Dispatched</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-title">Credit Outstanding (கடன்)</div>
+        <div class="kpi-number" style="color: var(--danger);" id="kpi-total-credit-val">₹0</div>
+        <div class="kpi-subtitle">Customer Dues</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-title">Total Dispatched Trips</div>
+        <div class="kpi-number" style="color: var(--primary);" id="kpi-total-trips-val">0</div>
+        <div class="kpi-subtitle">Completed Orders</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-title">Stock Items Tracked</div>
+        <div class="kpi-number" style="color: #2563eb;">10 Items</div>
+        <div class="kpi-subtitle">Sands/Jalli: Unit | Cement: Bags</div>
+      </div>
+    </div>
+
+    <!-- PANEL 1: LIVE STOCK -->
+    <section id="panel-stock" class="view-panel active">
+      <div class="content-box">
+        <div class="content-box-header">
+          <div class="content-box-title">Material Stock Inventory (கையிருப்பு நிலவரம்)</div>
+          <button class="btn btn-outline btn-sm" onclick="openAdjustStockModal()">
+            ⚙️ Adjust Stock
+          </button>
+        </div>
+        <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">
+          * <b>MSand, Psand, 3/4 jalli, 1/2 jalli, 1 1/2 jalli, gravel, dust</b> are strictly measured in <b>Unit</b>. Cement in <b>Bags</b>, AAC Block in <b>Pieces</b>, and Ceramic in <b>Boxes</b>.
+        </p>
+        <div class="stock-grid" id="stock-cards-container">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- PANEL 2: DISPATCH BILLING -->
+    <section id="panel-billing" class="view-panel">
+      <div class="content-box" style="max-width: 680px; margin: 0 auto;">
+        <div class="content-box-header">
+          <div class="content-box-title">Create Dispatch Bill (விற்பனை லோடு பில்)</div>
+          <span style="font-size: 11px; background: var(--success-soft); color: var(--success); padding: 2px 8px; border-radius: 4px; font-weight: 700;">● Stock Auto-Deducts</span>
+        </div>
+
+        <form id="billing-form" onsubmit="handleDispatchSubmit(event)">
+          <div class="form-grid col-2">
+            <div class="input-field">
+              <label>Customer / Party Name *</label>
+              <input type="text" id="bill-customer" placeholder="e.g. Raja Builders / Murugan" required>
+            </div>
+            <div class="input-field">
+              <label>WhatsApp Mobile No</label>
+              <input type="tel" id="bill-phone" placeholder="10 Digit Number">
+            </div>
+          </div>
+
+          <div class="form-grid col-2" style="margin-top: 10px;">
+            <div class="input-field">
+              <label>Vehicle / Tipper No</label>
+              <input type="text" id="bill-vehicle" placeholder="TN 45 AB 1234" style="text-transform: uppercase;">
+            </div>
+            <div class="input-field">
+              <label>Delivery Site / Location</label>
+              <input type="text" id="bill-location" placeholder="e.g. Ring Road Site">
+            </div>
+          </div>
+
+          <div style="background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 12px; padding: 14px; margin-top: 14px;">
+            <div class="form-grid col-3">
+              <div class="input-field">
+                <label>Material Name *</label>
+                <select id="bill-material-select" onchange="handleBillMaterialChange()" required>
+                  <!-- Populated via script -->
+                </select>
+              </div>
+              <div class="input-field">
+                <label>Quantity *</label>
+                <input type="number" step="any" min="0.1" id="bill-qty" placeholder="0" oninput="updateBillCalculations()" required>
+              </div>
+              <div class="input-field">
+                <label>Unit of Measure</label>
+                <input type="text" id="bill-unit-display" readonly value="Unit">
+              </div>
+            </div>
+
+            <div class="form-grid col-2" style="margin-top: 12px;">
+              <div class="input-field">
+                <label>Rate per <span id="bill-rate-unit-label" style="color:var(--primary); font-weight:800;">Unit</span> ₹ (Manual Entry) *</label>
+                <input type="number" step="any" min="0" id="bill-rate-input" placeholder="e.g. 3800" oninput="updateBillCalculations()" required>
+              </div>
+              <div class="input-field">
+                <label>Transport / Tipper Rent ₹</label>
+                <input type="number" step="any" min="0" id="bill-transport-input" placeholder="0" oninput="updateBillCalculations()">
+              </div>
+            </div>
+          </div>
+
+          <!-- Total Calculation Card -->
+          <div class="calc-card">
+            <div class="calc-row">
+              <span>Material Cost:</span>
+              <span id="calc-material-cost" style="font-weight: 800;">₹0.00</span>
+            </div>
+            <div class="calc-row">
+              <span>Transport / Trip Rent:</span>
+              <span id="calc-transport-cost" style="font-weight: 800;">₹0.00</span>
+            </div>
+            <div class="calc-row grand-total">
+              <span>Grand Total Amount:</span>
+              <span id="calc-grand-total" style="font-size: 20px;">₹0.00</span>
+            </div>
+          </div>
+
+          <div class="form-grid col-2">
+            <div class="input-field">
+              <label>Payment Method</label>
+              <select id="bill-payment-mode">
+                <option value="Cash">Cash (ரொக்கம்)</option>
+                <option value="UPI">GPay / PhonePe (UPI)</option>
+                <option value="Bank">Bank Transfer (NEFT/RTGS)</option>
+                <option value="Credit">Full Credit (முழு கடன்)</option>
+              </select>
+            </div>
+            <div class="input-field">
+              <label>Amount Paid Now ₹</label>
+              <input type="number" step="any" min="0" id="bill-paid-input" placeholder="0" oninput="updateBillCalculations()">
+            </div>
+          </div>
+
+          <div style="font-size: 13px; font-weight: 800; color: var(--danger); margin-top: 10px;">
+            Balance Due (கடன் பாக்கி): <span id="calc-balance-due">₹0.00</span>
+          </div>
+
+          <div style="margin-top: 16px;">
+            <button type="submit" class="btn">
+              💾 Save Bill &amp; Deduct Stock
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- PANEL 3: QUARRY INWARD -->
+    <section id="panel-inward" class="view-panel">
+      <div class="content-box" style="max-width: 640px; margin: 0 auto 20px auto;">
+        <div class="content-box-header">
+          <div class="content-box-title">Quarry Stock Inward (கொள்முதல் வரவு)</div>
+          <span style="font-size: 11px; background: var(--success-soft); color: var(--success); padding: 2px 8px; border-radius: 4px; font-weight: 700;">+ Adds Stock Directly</span>
+        </div>
+
+        <form id="inward-form" onsubmit="handleInwardSubmit(event)">
+          <div class="form-grid col-2">
+            <div class="input-field">
+              <label>Material Name *</label>
+              <select id="inward-material-select" onchange="handleInwardMaterialChange()" required>
+                <!-- Populated via script -->
+              </select>
+            </div>
+            <div class="input-field">
+              <label>Quantity Received *</label>
+              <div style="display: flex; gap: 6px;">
+                <input type="number" step="any" min="0.1" id="inward-qty-input" placeholder="0" required>
+                <span id="inward-unit-indicator" style="background:#f1f5f9; border:1.5px solid #cbd5e1; padding:9px 12px; border-radius:8px; font-weight:800; font-size:13px; color:var(--primary);">Unit</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-grid col-2" style="margin-top: 10px;">
+            <div class="input-field">
+              <label>Quarry / Crusher / Supplier</label>
+              <input type="text" id="inward-supplier-input" placeholder="e.g. Sri Balaji Crusher">
+            </div>
+            <div class="input-field">
+              <label>Vehicle / Lorry No</label>
+              <input type="text" id="inward-vehicle-input" placeholder="TN 28 C 9876" style="text-transform: uppercase;">
+            </div>
+          </div>
+
+          <div style="margin-top: 16px;">
+            <button type="submit" class="btn btn-green">
+              📥 Add Stock to Inventory
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div class="content-box">
+        <div class="content-box-title" style="margin-bottom: 12px;">Recent Inward Deliveries</div>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Material</th>
+                <th>Qty Received</th>
+                <th>Supplier / Quarry</th>
+                <th>Vehicle No</th>
+              </tr>
+            </thead>
+            <tbody id="inward-table-body">
+              <!-- Rendered via script -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- PANEL 4: CUSTOMER CREDIT LEDGER -->
+    <section id="panel-ledger" class="view-panel">
+      <div class="content-box">
+        <div class="content-box-header">
+          <div class="content-box-title">Customer Outstanding &amp; Credit Ledger (கடன் பாக்கி)</div>
+          <div style="font-size: 13px; font-weight: 800; color: var(--danger);">
+            Total Credit Due: <span id="ledger-total-due-text">₹0</span>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Customer Name</th>
+                <th>Phone No</th>
+                <th>Total Purchases</th>
+                <th>Total Paid</th>
+                <th>Balance Due (பாக்கி)</th>
+                <th style="text-align: right;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="ledger-table-body">
+              <!-- Rendered via script -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- PANEL 5: TRIP HISTORY -->
+    <section id="panel-trips" class="view-panel">
+      <div class="content-box">
+        <div class="content-box-header">
+          <div class="content-box-title">Dispatched Trip &amp; Sales History</div>
+        </div>
+
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Bill No / Date</th>
+                <th>Customer</th>
+                <th>Vehicle No</th>
+                <th>Material &amp; Qty</th>
+                <th>Rate &amp; Total</th>
+                <th>Status</th>
+                <th style="text-align: right;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="trips-table-body">
+              <!-- Rendered via script -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Mobile Tab Bar -->
+  <nav class="mobile-tab-bar">
+    <button class="mobile-tab-btn active" data-panel="panel-stock" onclick="navigateTo('panel-stock')">
+      <span>📦</span><span>Stock</span>
+    </button>
+    <button class="mobile-tab-btn" data-panel="panel-billing" onclick="navigateTo('panel-billing')">
+      <span>🚚</span><span>Billing</span>
+    </button>
+    <button class="mobile-tab-btn" data-panel="panel-inward" onclick="navigateTo('panel-inward')">
+      <span>📥</span><span>Inward</span>
+    </button>
+    <button class="mobile-tab-btn" data-panel="panel-ledger" onclick="navigateTo('panel-ledger')">
+      <span>📒</span><span>Credit</span>
+    </button>
+    <button class="mobile-tab-btn" data-panel="panel-trips" onclick="navigateTo('panel-trips')">
+      <span>📋</span><span>Trips</span>
+    </button>
+  </nav>
+
+  <!-- Delivery Challan & Bill Modal -->
+  <div id="challan-modal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 style="font-size: 15px; font-weight: 800;">Delivery Challan &amp; Bill</h3>
+        <button class="modal-close-btn" onclick="closeModal('challan-modal')">&times;</button>
+      </div>
+
+      <div id="printable-bill-content" style="padding: 14px; border: 1px solid #cbd5e1; border-radius: 8px;">
+        <div style="text-align: center; border-bottom: 2px solid #0f172a; padding-bottom: 8px; margin-bottom: 10px;">
+          <div style="font-size: 10px; font-weight: 800; color: #64748b;">DELIVERY CHALLAN &amp; BILL</div>
+          <h2 style="font-size: 17px; font-weight: 900; color: #0f172a;">G.M TRADERS</h2>
+          <div style="font-size: 11px; font-weight: 800; color: #b45309;">TRANSPORT &amp; EARTHMOVERS</div>
+          <div style="font-size: 10px; color: #64748b;">M-Sand, P-Sand, Jalli, Gravel, Cement, AAC Block &amp; Ceramic</div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; font-size: 11px; border-bottom: 1px solid #e2e8f0; padding-bottom: 6px; margin-bottom: 8px;">
+          <div>
+            <div><b>Customer:</b> <span id="modal-cust-name">--</span></div>
+            <div><b>Phone:</b> <span id="modal-cust-phone">--</span></div>
+            <div><b>Site:</b> <span id="modal-cust-site">--</span></div>
+          </div>
+          <div style="text-align: right;">
+            <div><b>Bill No:</b> <span id="modal-bill-no">#000</span></div>
+            <div><b>Date:</b> <span id="modal-bill-date">--</span></div>
+            <div><b>Vehicle:</b> <span id="modal-bill-veh">--</span></div>
+          </div>
+        </div>
+
+        <table style="width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 12px;">
+          <thead>
+            <tr style="border-bottom: 1px solid #0f172a;">
+              <th style="padding: 4px; background: transparent;">Item</th>
+              <th style="padding: 4px; text-align: center; background: transparent;">Qty</th>
+              <th style="padding: 4px; text-align: right; background: transparent;">Rate</th>
+              <th style="padding: 4px; text-align: right; background: transparent;">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding: 6px 4px; font-weight: 800;" id="modal-bill-item">--</td>
+              <td style="padding: 6px 4px; text-align: center;" id="modal-bill-qty">--</td>
+              <td style="padding: 6px 4px; text-align: right;" id="modal-bill-rate">--</td>
+              <td style="padding: 6px 4px; text-align: right; font-weight: 800;" id="modal-bill-subtotal">--</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div style="font-size: 12px; line-height: 1.6; border-top: 1px solid #e2e8f0; padding-top: 6px;">
+          <div style="display: flex; justify-content: space-between;">
+            <span>Transport Rent:</span>
+            <span id="modal-bill-transport">₹0.00</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-weight: 900; font-size: 14px;">
+            <span>Grand Total:</span>
+            <span id="modal-bill-total">₹0.00</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; color: var(--success); font-weight: 700;">
+            <span>Amount Paid:</span>
+            <span id="modal-bill-paid">₹0.00</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; color: var(--danger); font-weight: 800;">
+            <span>Balance Due:</span>
+            <span id="modal-bill-balance">₹0.00</span>
+          </div>
+        </div>
+
+        <div style="margin-top: 16px; display: flex; justify-content: space-between; font-size: 9px; color: #64748b;">
+          <div>Customer Signature</div>
+          <div style="text-align: right;">For G.M TRADERS<br><br>Authorized Signature</div>
+        </div>
+      </div>
+
+      <div style="margin-top: 14px; display: flex; gap: 8px;">
+        <button class="btn btn-green" onclick="shareChallanViaWhatsApp()">
+          📲 Send WhatsApp Bill
+        </button>
+        <button class="btn btn-outline" onclick="window.print()">
+          🖨️ Print
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Credit Settlement Modal -->
+  <div id="payment-modal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 style="font-size: 15px; font-weight: 800;">Receive Balance Payment (வரவு)</h3>
+        <button class="modal-close-btn" onclick="closeModal('payment-modal')">&times;</button>
+      </div>
+      <div>
+        <div style="font-size: 13px; color: var(--text-muted);">Customer: <b id="pay-modal-customer-name" style="color: var(--text-main);"></b></div>
+        <div style="font-size: 14px; color: var(--danger); font-weight: 800; margin: 4px 0 12px 0;">
+          Pending Balance: <span id="pay-modal-balance-text">₹0</span>
+        </div>
+        <div class="input-field">
+          <label>Payment Amount Received ₹</label>
+          <input type="number" step="any" id="pay-modal-amount-input" placeholder="0">
+        </div>
+        <div style="margin-top: 14px;">
+          <button class="btn btn-green" onclick="submitCreditPayment()">
+            ✓ Record Payment &amp; Settle
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Manual Stock Correction Modal -->
+  <div id="adjust-stock-modal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 style="font-size: 15px; font-weight: 800;">Adjust Stock Count</h3>
+        <button class="modal-close-btn" onclick="closeModal('adjust-stock-modal')">&times;</button>
+      </div>
+      <div class="input-field">
+        <label>Select Material</label>
+        <select id="adjust-material-select" onchange="handleAdjustSelectChange()">
+          <!-- Populated via script -->
+        </select>
+      </div>
+      <div class="input-field" style="margin-top: 12px;">
+        <label>New Corrected Stock Quantity</label>
+        <input type="number" step="any" id="adjust-quantity-input">
+      </div>
+      <div style="margin-top: 16px;">
+        <button class="btn" onclick="submitAdjustStock()">
+          Update Stock
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Box -->
+  <div id="notification-toast" class="toast-msg">Action completed!</div>
+
+  <script>
+    // 10 Materials Configuration
+    const MATERIAL_CATALOG = [
+      { id: 'msand', name: 'MSand', unit: 'Unit', defaultStock: 25.0 },
+      { id: 'psand', name: 'Psand', unit: 'Unit', defaultStock: 20.0 },
+      { id: '3_4_jalli', name: '3/4 jalli', unit: 'Unit', defaultStock: 30.0 },
+      { id: '1_2_jalli', name: '1/2 jalli', unit: 'Unit', defaultStock: 18.0 },
+      { id: '1_1_2_jalli', name: '1 1/2 jalli', unit: 'Unit', defaultStock: 15.0 },
+      { id: 'gravel', name: 'gravel', unit: 'Unit', defaultStock: 35.0 },
+      { id: 'dust', name: 'dust', unit: 'Unit', defaultStock: 22.0 },
+      { id: 'cement', name: 'cement', unit: 'Bags', defaultStock: 120 },
+      { id: 'aac_block', name: 'aac block', unit: 'Pieces', defaultStock: 800 },
+      { id: 'ceramic', name: 'Ceramic', unit: 'Box', defaultStock: 75 }
+    ];
+
+    let currentStocks = {};
+    let dispatchRecords = [];
+    let inwardDeliveries = [];
+    let partyBalances = {};
+    let selectedChallan = null;
+    let selectedPartyKey = null;
+
+    function initApplication() {
+      loadSavedData();
+      populateDropdownOptions();
+      refreshAllScreens();
+    }
+
+    function loadSavedData() {
+      try {
+        const s = localStorage.getItem('gm_stocks');
+        currentStocks = s ? JSON.parse(s) : {};
+      } catch (e) { currentStocks = {}; }
+
+      MATERIAL_CATALOG.forEach(item => {
+        if (currentStocks[item.id] === undefined) {
+          currentStocks[item.id] = item.defaultStock;
+        }
+      });
+
+      try {
+        const b = localStorage.getItem('gm_dispatches');
+        dispatchRecords = b ? JSON.parse(b) : [];
+      } catch (e) { dispatchRecords = []; }
+
+      try {
+        const i = localStorage.getItem('gm_inwards');
+        inwardDeliveries = i ? JSON.parse(i) : [];
+      } catch (e) { inwardDeliveries = []; }
+
+      try {
+        const l = localStorage.getItem('gm_ledger');
+        partyBalances = l ? JSON.parse(l) : {};
+      } catch (e) { partyBalances = {}; }
+    }
+
+    function persistData() {
+      localStorage.setItem('gm_stocks', JSON.stringify(currentStocks));
+      localStorage.setItem('gm_dispatches', JSON.stringify(dispatchRecords));
+      localStorage.setItem('gm_inwards', JSON.stringify(inwardDeliveries));
+      localStorage.setItem('gm_ledger', JSON.stringify(partyBalances));
+    }
+
+    function loadSampleDemoData() {
+      currentStocks = {
+        'msand': 28.0,
+        'psand': 22.0,
+        '3_4_jalli': 32.0,
+        '1_2_jalli': 20.0,
+        '1_1_2_jalli': 15.0,
+        'gravel': 40.0,
+        'dust': 25.0,
+        'cement': 150,
+        'aac_block': 950,
+        'ceramic': 80
+      };
+
+      dispatchRecords = [
+        {
+          id: 'B-1001',
+          billNo: 1001,
+          date: new Date().toISOString(),
+          customer: 'Raja Builders',
+          phone: '9842100001',
+          vehicle: 'TN 45 AX 2341',
+          location: 'Ring Road Project',
+          materialId: 'msand',
+          materialName: 'MSand',
+          unit: 'Unit',
+          qty: 2.0,
+          rate: 3800,
+          transport: 600,
+          total: 8200,
+          paid: 5000,
+          balance: 3200,
+          payMode: 'Cash'
+        },
+        {
+          id: 'B-1002',
+          billNo: 1002,
+          date: new Date().toISOString(),
+          customer: 'Selvam Promoters',
+          phone: '9443200002',
+          vehicle: 'TN 45 B 5678',
+          location: 'Trichy Main Road',
+          materialId: 'cement',
+          materialName: 'cement',
+          unit: 'Bags',
+          qty: 40,
+          rate: 420,
+          transport: 400,
+          total: 17200,
+          paid: 17200,
+          balance: 0,
+          payMode: 'UPI'
+        },
+        {
+          id: 'B-1003',
+          billNo: 1003,
+          date: new Date().toISOString(),
+          customer: 'Murugan Contractor',
+          phone: '9842500003',
+          vehicle: 'TN 28 F 9012',
+          location: 'Industrial Site',
+          materialId: '3_4_jalli',
+          materialName: '3/4 jalli',
+          unit: 'Unit',
+          qty: 3.0,
+          rate: 2900,
+          transport: 900,
+          total: 9600,
+          paid: 4000,
+          balance: 5600,
+          payMode: 'Credit'
+        }
+      ];
+
+      currentStocks['msand'] -= 2.0;
+      currentStocks['cement'] -= 40;
+      currentStocks['3_4_jalli'] -= 3.0;
+
+      inwardDeliveries = [
+        {
+          id: 'INW-1',
+          date: new Date().toISOString(),
+          materialId: 'psand',
+          materialName: 'Psand',
+          unit: 'Unit',
+          qty: 8.0,
+          supplier: 'Sri Balaji Blue Metals Crusher',
+          vehicle: 'TN 28 D 4455'
+        }
+      ];
+      currentStocks['psand'] += 8.0;
+
+      partyBalances = {
+        'raja_builders': {
+          name: 'Raja Builders',
+          phone: '9842100001',
+          purchases: 8200,
+          paid: 5000,
+          balance: 3200
+        },
+        'selvam_promoters': {
+          name: 'Selvam Promoters',
+          phone: '9443200002',
+          purchases: 17200,
+          paid: 17200,
+          balance: 0
+        },
+        'murugan_contractor': {
+          name: 'Murugan Contractor',
+          phone: '9842500003',
+          purchases: 9600,
+          paid: 4000,
+          balance: 5600
+        }
+      };
+
+      persistData();
+      refreshAllScreens();
+      displayToast('Demo data loaded successfully!');
+    }
+
+    function resetAllAppData() {
+      localStorage.removeItem('gm_stocks');
+      localStorage.removeItem('gm_dispatches');
+      localStorage.removeItem('gm_inwards');
+      localStorage.removeItem('gm_ledger');
+      currentStocks = {};
+      dispatchRecords = [];
+      inwardDeliveries = [];
+      partyBalances = {};
+      loadSavedData();
+      refreshAllScreens();
+      displayToast('All data has been reset.');
+    }
+
+    function navigateTo(panelId) {
+      document.querySelectorAll('.view-panel').forEach(el => el.classList.remove('active'));
+      const activeEl = document.getElementById(panelId);
+      if (activeEl) activeEl.classList.add('active');
+
+      document.querySelectorAll('.nav-link').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.panel === panelId);
+      });
+      document.querySelectorAll('.mobile-tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.panel === panelId);
+      });
+    }
+
+    function populateDropdownOptions() {
+      const bSel = document.getElementById('bill-material-select');
+      const iSel = document.getElementById('inward-material-select');
+      const aSel = document.getElementById('adjust-material-select');
+
+      bSel.innerHTML = '';
+      iSel.innerHTML = '';
+      aSel.innerHTML = '';
+
+      MATERIAL_CATALOG.forEach(m => {
+        const opt = `<option value="${m.id}">${m.name} (${m.unit})</option>`;
+        bSel.innerHTML += opt;
+        iSel.innerHTML += opt;
+        aSel.innerHTML += opt;
+      });
+
+      handleBillMaterialChange();
+      handleInwardMaterialChange();
+      handleAdjustSelectChange();
+    }
+
+    function handleBillMaterialChange() {
+      const id = document.getElementById('bill-material-select').value;
+      const item = MATERIAL_CATALOG.find(m => m.id === id);
+      if (!item) return;
+
+      document.getElementById('bill-unit-display').value = item.unit;
+      document.getElementById('bill-rate-unit-label').textContent = item.unit;
+      updateBillCalculations();
+    }
+
+    function handleInwardMaterialChange() {
+      const id = document.getElementById('inward-material-select').value;
+      const item = MATERIAL_CATALOG.find(m => m.id === id);
+      if (item) {
+        document.getElementById('inward-unit-indicator').textContent = item.unit;
+      }
+    }
+
+    function handleAdjustSelectChange() {
+      const id = document.getElementById('adjust-material-select').value;
+      document.getElementById('adjust-quantity-input').value = currentStocks[id] !== undefined ? currentStocks[id] : 0;
+    }
+
+    function updateBillCalculations() {
+      const qty = parseFloat(document.getElementById('bill-qty').value) || 0;
+      const rate = parseFloat(document.getElementById('bill-rate-input').value) || 0;
+      const transport = parseFloat(document.getElementById('bill-transport-input').value) || 0;
+
+      const subtotal = qty * rate;
+      const total = subtotal + transport;
+
+      document.getElementById('calc-material-cost').textContent = `₹${subtotal.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
+      document.getElementById('calc-transport-cost').textContent = `₹${transport.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
+      document.getElementById('calc-grand-total').textContent = `₹${total.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
+
+      const paid = parseFloat(document.getElementById('bill-paid-input').value) || 0;
+      const balance = Math.max(0, total - paid);
+      document.getElementById('calc-balance-due').textContent = `₹${balance.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
+
+      return { subtotal, total, paid, balance };
+    }
+
+    function handleDispatchSubmit(e) {
+      e.preventDefault();
+      const customer = document.getElementById('bill-customer').value.trim();
+      const phone = document.getElementById('bill-phone').value.trim();
+      const vehicle = document.getElementById('bill-vehicle').value.trim();
+      const location = document.getElementById('bill-location').value.trim();
+
+      const materialId = document.getElementById('bill-material-select').value;
+      const item = MATERIAL_CATALOG.find(m => m.id === materialId);
+
+      const qty = parseFloat(document.getElementById('bill-qty').value);
+      const rate = parseFloat(document.getElementById('bill-rate-input').value);
+      const transport = parseFloat(document.getElementById('bill-transport-input').value) || 0;
+      const payMode = document.getElementById('bill-payment-mode').value;
+      const paidInput = parseFloat(document.getElementById('bill-paid-input').value);
+
+      if (!customer || isNaN(qty) || qty <= 0 || isNaN(rate) || rate < 0) {
+        displayToast('Please fill valid Customer, Quantity and Rate!');
+        return;
+      }
+
+      const subtotal = qty * rate;
+      const total = subtotal + transport;
+      const paid = isNaN(paidInput) ? (payMode === 'Credit' ? 0 : total) : Math.min(paidInput, total);
+      const balance = Math.max(0, total - paid);
+
+      // Deduct stock
+      currentStocks[materialId] = Number(((currentStocks[materialId] || 0) - qty).toFixed(2));
+
+      const billNo = 1000 + dispatchRecords.length + 1;
+      const entry = {
+        id: 'B-' + Date.now(),
+        billNo: billNo,
+        date: new Date().toISOString(),
+        customer: customer,
+        phone: phone,
+        vehicle: vehicle || 'Self Transport',
+        location: location,
+        materialId: materialId,
+        materialName: item.name,
+        unit: item.unit,
+        qty: qty,
+        rate: rate,
+        transport: transport,
+        total: total,
+        paid: paid,
+        balance: balance,
+        payMode: payMode
+      };
+
+      dispatchRecords.push(entry);
+
+      // Update Ledger
+      const key = customer.toLowerCase().replace(/\s+/g, '_');
+      if (!partyBalances[key]) {
+        partyBalances[key] = {
+          name: customer,
+          phone: phone,
+          purchases: 0,
+          paid: 0,
+          balance: 0
+        };
+      }
+      partyBalances[key].purchases += total;
+      partyBalances[key].paid += paid;
+      partyBalances[key].balance += balance;
+      if (phone) partyBalances[key].phone = phone;
+
+      persistData();
+      displayToast(`Bill #${billNo} created & stock deducted!`);
+
+      // Reset form
+      document.getElementById('billing-form').reset();
+      document.getElementById('bill-transport-input').value = '';
+      document.getElementById('bill-paid-input').value = '';
+      handleBillMaterialChange();
+
+      refreshAllScreens();
+      displayChallanModal(entry.id);
+    }
+
+    function handleInwardSubmit(e) {
+      e.preventDefault();
+      const materialId = document.getElementById('inward-material-select').value;
+      const qty = parseFloat(document.getElementById('inward-qty-input').value);
+      const supplier = document.getElementById('inward-supplier-input').value.trim();
+      const vehicle = document.getElementById('inward-vehicle-input').value.trim();
+      const item = MATERIAL_CATALOG.find(m => m.id === materialId);
+
+      if (isNaN(qty) || qty <= 0) {
+        displayToast('Please enter a valid received quantity!');
+        return;
+      }
+
+      currentStocks[materialId] = Number(((currentStocks[materialId] || 0) + qty).toFixed(2));
+
+      const inwardEntry = {
+        id: 'INW-' + Date.now(),
+        date: new Date().toISOString(),
+        materialId: materialId,
+        materialName: item.name,
+        unit: item.unit,
+        qty: qty,
+        supplier: supplier || '--',
+        vehicle: vehicle || '--'
+      };
+
+      inwardDeliveries.push(inwardEntry);
+      persistData();
+      displayToast(`+${qty} ${item.unit} added to ${item.name}!`);
+
+      document.getElementById('inward-form').reset();
+      handleInwardMaterialChange();
+      refreshAllScreens();
+      navigateTo('panel-stock');
+    }
+
+    function renderStockCardsView() {
+      const container = document.getElementById('stock-cards-container');
+      container.innerHTML = '';
+
+      MATERIAL_CATALOG.forEach(m => {
+        const qty = currentStocks[m.id] !== undefined ? currentStocks[m.id] : 0;
+        const isLow = qty <= (m.unit === 'Pieces' ? 100 : m.unit === 'Bags' ? 15 : 5);
+
+        const card = document.createElement('div');
+        card.className = 'stock-card';
+        card.innerHTML = `
+          <div>
+            <div class="stock-item-name">${m.name}</div>
+            <div class="stock-item-badge ${m.unit === 'Unit' ? 'unit-badge' : ''}">Unit: ${m.unit}</div>
+          </div>
+          <div class="stock-val-box">
+            <div class="stock-qty-display ${isLow ? 'low' : ''}">${qty}</div>
+            <div style="font-size:10px; font-weight:800; color:var(--text-muted); text-transform:uppercase;">${isLow ? 'Low Stock' : 'In Stock'}</div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function renderSummaryKPIs() {
+      const today = new Date().toDateString();
+      let todaySales = 0;
+      let todayLoads = 0;
+
+      dispatchRecords.forEach(b => {
+        if (new Date(b.date).toDateString() === today) {
+          todaySales += b.total;
+          todayLoads++;
+        }
+      });
+
+      document.getElementById('kpi-today-sales-val').textContent = `₹${todaySales.toLocaleString('en-IN')}`;
+      document.getElementById('kpi-today-loads-val').textContent = `${todayLoads} Loads Dispatched`;
+      document.getElementById('kpi-total-trips-val').textContent = dispatchRecords.length;
+
+      let totalOutstanding = 0;
+      Object.values(partyBalances).forEach(c => {
+        totalOutstanding += c.balance;
+      });
+      document.getElementById('kpi-total-credit-val').textContent = `₹${totalOutstanding.toLocaleString('en-IN')}`;
+      document.getElementById('ledger-total-due-text').textContent = `₹${totalOutstanding.toLocaleString('en-IN')}`;
+    }
+
+    function renderInwardTableView() {
+      const tbody = document.getElementById('inward-table-body');
+      tbody.innerHTML = '';
+
+      if (inwardDeliveries.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:var(--text-muted);">No quarry inward deliveries recorded yet</td></tr>';
+        return;
+      }
+
+      inwardDeliveries.slice().reverse().forEach(inw => {
+        const dStr = new Date(inw.date).toLocaleDateString('en-IN', { day: '2-digit', month: 'short' });
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${dStr}</td>
+          <td><b>${inw.materialName}</b></td>
+          <td style="color:var(--success); font-weight:800;">+${inw.qty} ${inw.unit}</td>
+          <td>${inw.supplier}</td>
+          <td style="text-transform:uppercase;">${inw.vehicle}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function renderLedgerTableView() {
+      const tbody = document.getElementById('ledger-table-body');
+      tbody.innerHTML = '';
+
+      const keys = Object.keys(partyBalances);
+      if (keys.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; color:var(--text-muted);">No customer credit accounts found</td></tr>';
+        return;
+      }
+
+      keys.forEach(k => {
+        const c = partyBalances[k];
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><b>${c.name}</b></td>
+          <td>${c.phone || '--'}</td>
+          <td>₹${c.purchases.toLocaleString('en-IN')}</td>
+          <td style="color:var(--success); font-weight:700;">₹${c.paid.toLocaleString('en-IN')}</td>
+          <td style="color:var(--danger); font-weight:900;">₹${c.balance.toLocaleString('en-IN')}</td>
+          <td style="text-align:right;">
+            ${c.phone && c.balance > 0 ? `<button class="btn btn-sm btn-green" onclick="sendWhatsAppReminderMsg('${k}')" style="margin-right:4px;">WhatsApp</button>` : ''}
+            ${c.balance > 0 ? `<button class="btn btn-sm" onclick="openCreditPaymentModal('${k}')">Collect</button>` : '<span style="color:var(--success); font-size:11px; font-weight:800;">Settled</span>'}
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function renderTripsTableView() {
+      const tbody = document.getElementById('trips-table-body');
+      tbody.innerHTML = '';
+
+      if (dispatchRecords.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; color:var(--text-muted);">No sales dispatches issued yet</td></tr>';
+        return;
+      }
+
+      dispatchRecords.slice().reverse().forEach(b => {
+        const dStr = new Date(b.date).toLocaleDateString('en-IN', { day: '2-digit', month: 'short' });
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><b>#${b.billNo}</b><div style="font-size:10px; color:var(--text-muted);">${dStr}</div></td>
+          <td><b>${b.customer}</b></td>
+          <td style="text-transform:uppercase;">${b.vehicle}</td>
+          <td>${b.materialName} <b style="color:var(--primary);">(${b.qty} ${b.unit})</b></td>
+          <td><b>₹${b.total.toLocaleString('en-IN')}</b><div style="font-size:10px; color:var(--text-muted);">@ ₹${b.rate}/${b.unit}</div></td>
+          <td>
+            <span style="font-size:11px; font-weight:800; color:${b.balance > 0 ? 'var(--danger)' : 'var(--success)'};">
+              ${b.balance > 0 ? `Due: ₹${b.balance}` : 'Paid Full'}
+            </span>
+          </td>
+          <td style="text-align:right;">
+            <button class="btn btn-outline btn-sm" onclick="displayChallanModal('${b.id}')">View</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function refreshAllScreens() {
+      renderStockCardsView();
+      renderSummaryKPIs();
+      renderInwardTableView();
+      renderLedgerTableView();
+      renderTripsTableView();
+    }
+
+    function displayChallanModal(id) {
+      const b = dispatchRecords.find(x => x.id === id);
+      if (!b) return;
+
+      selectedChallan = b;
+      document.getElementById('modal-bill-no').textContent = `#${b.billNo}`;
+      document.getElementById('modal-bill-date').textContent = new Date(b.date).toLocaleDateString('en-IN');
+      document.getElementById('modal-cust-name').textContent = b.customer;
+      document.getElementById('modal-cust-phone').textContent = b.phone || '--';
+      document.getElementById('modal-cust-site').textContent = b.location || '--';
+      document.getElementById('modal-bill-veh').textContent = b.vehicle;
+
+      document.getElementById('modal-bill-item').textContent = b.materialName;
+      document.getElementById('modal-bill-qty').textContent = `${b.qty} ${b.unit}`;
+      document.getElementById('modal-bill-rate').textContent = `₹${b.rate}`;
+      document.getElementById('modal-bill-subtotal').textContent = `₹${(b.qty * b.rate).toLocaleString('en-IN')}`;
+
+      document.getElementById('modal-bill-transport').textContent = `₹${(b.transport || 0).toLocaleString('en-IN')}`;
+      document.getElementById('modal-bill-total').textContent = `₹${b.total.toLocaleString('en-IN')}`;
+      document.getElementById('modal-bill-paid').textContent = `₹${b.paid.toLocaleString('en-IN')}`;
+      document.getElementById('modal-bill-balance').textContent = `₹${b.balance.toLocaleString('en-IN')}`;
+
+      document.getElementById('challan-modal').classList.add('open');
+    }
+
+    function shareChallanViaWhatsApp() {
+      if (!selectedChallan) return;
+      const b = selectedChallan;
+
+      let msg = `*G.M TRADERS - TRANSPORT & EARTHMOVERS*%0A`;
+      msg += `*Delivery Challan & Bill*%0A`;
+      msg += `----------------------------------%0A`;
+      msg += `*Bill No:* %23${b.billNo}%0A`;
+      msg += `*Date:* ${new Date(b.date).toLocaleDateString('en-IN')}%0A`;
+      msg += `*Customer:* ${b.customer}%0A`;
+      msg += `*Vehicle:* ${b.vehicle}%0A`;
+      if (b.location) msg += `*Site:* ${b.location}%0A`;
+      msg += `----------------------------------%0A`;
+      msg += `*Material:* ${b.materialName}%0A`;
+      msg += `*Quantity:* ${b.qty} ${b.unit}%0A`;
+      msg += `*Rate:* ₹${b.rate} / ${b.unit}%0A`;
+      if (b.transport > 0) msg += `*Transport Rent:* ₹${b.transport}%0A`;
+      msg += `*Total Amount:* ₹${b.total.toLocaleString('en-IN')}%0A`;
+      msg += `*Paid Amount:* ₹${b.paid.toLocaleString('en-IN')}%0A`;
+      if (b.balance > 0) {
+        msg += `*Balance Due (பாக்கி):* ₹${b.balance.toLocaleString('en-IN')}%0A`;
+      }
+      msg += `----------------------------------%0A`;
+      msg += `_Thank you for your business!_`;
+
+      const num = (b.phone || '').replace(/\D/g, '');
+      const url = num.length >= 10 
+        ? `https://wa.me/91${num.slice(-10)}?text=${msg}`
+        : `https://wa.me/?text=${msg}`;
+
+      window.open(url, '_blank');
+    }
+
+    function sendWhatsAppReminderMsg(key) {
+      const p = partyBalances[key];
+      if (!p || !p.phone) return;
+
+      let msg = `*G.M TRADERS - TRANSPORT & EARTHMOVERS*%0A`;
+      msg += `வணக்கம் *${p.name}*,%0A`;
+      msg += `தங்களுடைய மொத்த கொள்முதல்: ₹${p.purchases.toLocaleString('en-IN')}%0A`;
+      msg += `செலுத்திய தொகை: ₹${p.paid.toLocaleString('en-IN')}%0A`;
+      msg += `*தற்போதைய பாக்கி தொகை: ₹${p.balance.toLocaleString('en-IN')}*%0A`;
+      msg += `பாக்கி தொகையை விரைவில் செலுத்துமாறு கேட்டுக்கொள்கிறோம்.%0Aநன்றி!`;
+
+      const num = p.phone.replace(/\D/g, '');
+      window.open(`https://wa.me/91${num.slice(-10)}?text=${msg}`, '_blank');
+    }
+
+    function openCreditPaymentModal(partyKey) {
+      selectedPartyKey = partyKey;
+      const p = partyBalances[partyKey];
+      if (!p) return;
+
+      document.getElementById('pay-modal-customer-name').textContent = p.name;
+      document.getElementById('pay-modal-balance-text').textContent = `₹${p.balance.toLocaleString('en-IN')}`;
+      document.getElementById('pay-modal-amount-input').value = p.balance;
+      document.getElementById('payment-modal').classList.add('open');
+    }
+
+    function submitCreditPayment() {
+      if (!selectedPartyKey || !partyBalances[selectedPartyKey]) return;
+      const amt = parseFloat(document.getElementById('pay-modal-amount-input').value);
+
+      if (isNaN(amt) || amt <= 0) {
+        displayToast('Please enter a valid settlement amount!');
+        return;
+      }
+
+      const party = partyBalances[selectedPartyKey];
+      party.balance = Math.max(0, party.balance - amt);
+      party.paid += amt;
+      persistData();
+
+      closeModal('payment-modal');
+      displayToast(`Payment of ₹${amt.toLocaleString('en-IN')} recorded!`);
+      refreshAllScreens();
+    }
+
+    function openAdjustStockModal() {
+      handleAdjustSelectChange();
+      document.getElementById('adjust-stock-modal').classList.add('open');
+    }
+
+    function submitAdjustStock() {
+      const id = document.getElementById('adjust-material-select').value;
+      const qty = parseFloat(document.getElementById('adjust-quantity-input').value);
+
+      if (isNaN(qty) || qty < 0) {
+        displayToast('Please enter a valid stock count!');
+        return;
+      }
+
+      currentStocks[id] = qty;
+      persistData();
+      closeModal('adjust-stock-modal');
+      displayToast('Stock quantity updated!');
+      renderStockCardsView();
+    }
+
+    function closeModal(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.remove('open');
+    }
+
+    function displayToast(msg) {
+      const t = document.getElementById('notification-toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2500);
+    }
+
+    function exportDataCSV() {
+      if (dispatchRecords.length === 0) {
+        displayToast('No sales records to export!');
+        return;
+      }
+
+      let csv = 'Bill No,Date,Customer,Phone,Vehicle,Material,Quantity,Unit,Rate,Transport,Total,Paid,Balance\n';
+      dispatchRecords.forEach(b => {
+        csv += `"${b.billNo}","${b.date}","${b.customer}","${b.phone}","${b.vehicle}","${b.materialName}","${b.qty}","${b.unit}","${b.rate}","${b.transport}","${b.total}","${b.paid}","${b.balance}"\n`;
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = `GM_Traders_Report_${new Date().toISOString().slice(0, 10)}.csv`;
+      link.click();
+      displayToast('CSV Report downloaded!');
+    }
+
+    window.addEventListener('DOMContentLoaded', initApplication);
+  </script>
+</body>
+</html>
